@@ -13,19 +13,20 @@ class Game:
     CELL_BORDER_COLOR = (0, 115, 210)
     VALUE_FONT_COLOR = (220, 220, 220)
 
-    STATUS_FONT_OFFSET = 5
-    VALUE_FONT_OFFSET = 55
+    STATUS_FONT_OFFSET = 4
+    VALUE_FONT_OFFSET = 42
+    GRID_OFFSET = 80
 
     ROW_COUNT = 6
     COLUMN_COUNT = 7
 
-    SQUARE_WIDTH = 100
+    SQUARE_WIDTH = 50
 
     def __init__(self, players: Tuple[Player, Player]):
         pygame.init()
-        self.STATUS_FONT = pygame.font.SysFont("Noto Sans", 32)
-        self.VALUE_FONT = pygame.font.SysFont("Noto Sans", 22)
-        self.__height = (self.ROW_COUNT + 1) * self.SQUARE_WIDTH
+        self.STATUS_FONT = pygame.font.SysFont("Noto Sans", 26)
+        self.VALUE_FONT = pygame.font.SysFont("Noto Sans", 18)
+        self.__height = self.ROW_COUNT * self.SQUARE_WIDTH + self.GRID_OFFSET
         self.__width = self.COLUMN_COUNT * self.SQUARE_WIDTH
         self.__screen = pygame.display.set_mode((self.__width, self.__height))
         pygame.display.set_caption("Game")
@@ -63,7 +64,7 @@ class Game:
             self.CELL_BORDER_COLOR,
             (
                 column * self.SQUARE_WIDTH,
-                row * self.SQUARE_WIDTH + self.SQUARE_WIDTH,
+                row * self.SQUARE_WIDTH + self.GRID_OFFSET,
                 self.SQUARE_WIDTH,
                 self.SQUARE_WIDTH,
             ),
@@ -84,7 +85,7 @@ class Game:
             color,
             (
                 int(column * self.SQUARE_WIDTH + self.SQUARE_WIDTH / 2),
-                int((row + 1) * self.SQUARE_WIDTH + self.SQUARE_WIDTH / 2),
+                int(row * self.SQUARE_WIDTH + self.SQUARE_WIDTH / 2 + self.GRID_OFFSET),
             ),
             int(self.SQUARE_WIDTH // 2) - 5,
         )
