@@ -1,15 +1,9 @@
-from exceptions import IllegalMoveException
 from player import Player
 from player_type import PlayerType
-from board import Board
 from alpha_beta_pruning import minimax
 import time
 import pygame
 from game import Game
-
-ROW_COUNT = 6
-COLUMN_COUNT = 7
-
 
 def determine_player_type(number: int) -> PlayerType:
     """
