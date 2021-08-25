@@ -1,9 +1,12 @@
+import time
+
+import pygame
+
+from alpha_beta_pruning import minimax
+from game import Game
 from player import Player
 from player_type import PlayerType
-from alpha_beta_pruning import minimax
-import time
-import pygame
-from game import Game
+
 
 def determine_player_type(number: int) -> PlayerType:
     """

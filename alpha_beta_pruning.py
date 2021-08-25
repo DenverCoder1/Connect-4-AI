@@ -1,7 +1,8 @@
-from transposition_table import CacheEntry, TranspositionTable
-from typing import Optional, Tuple, Union
-from board import Board
 import math
+from typing import Optional, Tuple, Union
+
+from board import Board
+from transposition_table import CacheEntry, TranspositionTable
 
 MAX_DEPTH = 2
 

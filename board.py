@@ -1,9 +1,10 @@
+import copy
+from typing import Generator, List, Optional, Tuple
+
 from exceptions import ColumnFullException, ColumnOutOfBoundsException
+from player import Player
 from player_type import PlayerType
 from status import Status
-import copy
-from player import Player
-from typing import Generator, List, Optional, Tuple
 
 
 class Board:
@@ -60,7 +61,9 @@ class Board:
 
     def __copy(self) -> "Board":
         """Returns a new board containing a copy of the current one"""
-        new_board = Board(self.__rows, self.__columns, self.__players, self.__active_player)
+        new_board = Board(
+            self.__rows, self.__columns, self.__players, self.__active_player
+        )
         new_board.__grid = copy.deepcopy(self.__grid)
         return new_board
 
@@ -206,9 +209,7 @@ class Board:
 
         def count_symbol(player: Player, *cells: Player) -> int:
             """Returns number of cells matching player"""
-            return sum(
-                cell == player for cell in cells if cell is not None
-            )
+            return sum(cell == player for cell in cells if cell is not None)
 
         def score_group(*group: Player) -> int:
             """Return score to add for a group of cells"""

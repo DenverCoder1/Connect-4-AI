@@ -1,5 +1,6 @@
-from board import Board
 from collections import OrderedDict
+
+from board import Board
 
 
 class TranspositionTable(OrderedDict):

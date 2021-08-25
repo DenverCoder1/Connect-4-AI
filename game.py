@@ -1,9 +1,11 @@
-from status import Status
-from player import Player
-from exceptions import IllegalMoveException
 from typing import Tuple
-from board import Board
+
 import pygame
+
+from board import Board
+from exceptions import IllegalMoveException
+from player import Player
+from status import Status
 
 
 class Game:
