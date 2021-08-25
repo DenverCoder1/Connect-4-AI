@@ -7,19 +7,27 @@ import pygame
 
 
 class Game:
+    """
+    This class handles interactions with the pygame user interface.
+    """
+
+    # colors
     BACKGROUND_COLOR = (20, 20, 20)
     PLAYER_1_COLOR = (255, 100, 100)
     PLAYER_2_COLOR = (255, 255, 130)
     CELL_BORDER_COLOR = (0, 115, 210)
     VALUE_FONT_COLOR = (220, 220, 220)
 
-    STATUS_FONT_OFFSET = 4
-    VALUE_FONT_OFFSET = 42
+    # number of pixels from the top of the screen
+    STATUS_TEXT_OFFSET = 4
+    VALUE_TEXT_OFFSET = 42
     GRID_OFFSET = 80
 
+    # number of rows and columns
     ROW_COUNT = 6
     COLUMN_COUNT = 7
 
+    # width and height of the cell in pixels
     SQUARE_WIDTH = 50
 
     def __init__(self, players: Tuple[Player, Player]):
@@ -121,7 +129,7 @@ class Game:
             status_text_render,
             (
                 self.__width / 2 - status_text_render.get_width() / 2,
-                self.STATUS_FONT_OFFSET,
+                self.STATUS_TEXT_OFFSET,
             ),
         )
         # draw value text
@@ -132,7 +140,7 @@ class Game:
             value_text_render,
             (
                 self.__width / 2 - value_text_render.get_width() / 2,
-                self.VALUE_FONT_OFFSET,
+                self.VALUE_TEXT_OFFSET,
             ),
         )
 
