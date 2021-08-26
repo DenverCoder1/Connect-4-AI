@@ -26,7 +26,7 @@ class Board:
             Player("X", "Red", PlayerType.HUMAN),
             Player("O", "Yellow", PlayerType.AI),
         ),
-        active_player: int = 0,
+        active_player_index: int = 0,
         grid: Optional[List[List[Optional[Player]]]] = None,
     ):
         """
@@ -43,7 +43,7 @@ class Board:
         self.__rows = rows
         self.__columns = columns
         self.__players = players
-        self.__active_player = active_player
+        self.__active_player_index = active_player_index
         self.__column_search_order = self.__column_search_order()
 
     @property
@@ -59,19 +59,23 @@ class Board:
     @property
     def active_player(self) -> Player:
         """Returns the active player"""
-        return self.__players[self.__active_player]
+        return self.__players[self.__active_player_index]
 
     def __copy(self) -> "Board":
         """Returns a new board containing a copy of the current one"""
         new_board = Board(
-            self.__rows, self.__columns, self.__players, self.__active_player
+            self.__rows, self.__columns, self.__players, self.__active_player_index
         )
         new_board.__grid = copy.deepcopy(self.__grid)
         return new_board
 
     def is_human_turn(self) -> bool:
         """Returns True if current player is a human, False otherwise."""
-        return self.__players[self.__active_player].type == PlayerType.HUMAN
+        return self.__players[self.__active_player_index].type == PlayerType.HUMAN
+
+    def player_1_is_active(self) -> bool:
+        """Returns True if player 1 is active, False otherwise."""
+        return self.__active_player_index == 0
 
     def status(self) -> Status:
         """
@@ -118,11 +122,11 @@ class Board:
         row = self.__next_open_row(column)
         if row is None:
             raise ColumnFullException(column)
-        self.__grid[row][column] = self.__players[self.__active_player]
+        self.__grid[row][column] = self.__players[self.__active_player_index]
 
     def change_turn(self) -> None:
         """Toggles the turn indicator between 0 and 1."""
-        self.__active_player = 1 - self.__active_player
+        self.__active_player_index = 1 - self.__active_player_index
 
     def __next_open_row(self, column: int) -> Optional[int]:
         """
