@@ -160,13 +160,22 @@ class Board:
         Yields:
             Board states that can be created by placing a piece
         """
-        for column in range(self.__columns):
+        for column in self.column_search_order():
             if self.__column_is_full(column):
                 continue
             new_board = self.__copy()
             new_board.place_piece(column)
             new_board.change_turn()
             yield new_board
+
+    def column_search_order(self) -> Generator[int, None, None]:
+        """
+        Finds the optimal order to choose columns in for optimization.
+        """
+        # sort columns by distance from center and yield each
+        columns = range(self.__columns)
+        order = lambda x: abs(x - self.__columns // 2)
+        return (col for col in sorted(columns, key=order))
 
     def key(self) -> Tuple[Tuple[Optional[str]]]:
         """Returns a hashable key for the board"""
