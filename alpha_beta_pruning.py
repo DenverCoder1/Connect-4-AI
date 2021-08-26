@@ -32,7 +32,7 @@ def minimax(
         Tuple containing the board value and board for the best move.
         Returns None if no move is found.
     """
-    maximizing = maximizing if maximizing is not None else not board.active_player
+    maximizing = maximizing if maximizing is not None else board.player_1_is_active()
     alpha_0 = alpha
 
     if board.key() in transposition_table:

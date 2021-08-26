@@ -106,7 +106,7 @@ class Game:
         """
         # active player text
         status_text = f"It's {self.board.active_player.color_name}'s turn"
-        player_1_active = self.board.active_player == self.board.players[0]
+        player_1_active = self.board.player_1_is_active()
         status_color = self.PLAYER_1_COLOR if player_1_active else self.PLAYER_2_COLOR
 
         # value text
