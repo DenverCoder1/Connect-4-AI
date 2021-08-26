@@ -1,5 +1,4 @@
 import copy
-from functools import cached_property
 from typing import Generator, List, Optional, Tuple
 
 from exceptions import ColumnFullException, ColumnOutOfBoundsException
