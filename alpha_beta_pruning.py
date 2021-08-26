@@ -59,20 +59,15 @@ def minimax(
     best_move = None
     for successor in board.successors():
         # recursively call the function for minimization if max_player, or for maximizing otherwise
-        succ_value, _ = minimax(successor, not maximizing, depth - 1, alpha, beta)
-        # set conditions and maximize alpha
+        value, _ = minimax(successor, not maximizing, depth - 1, alpha, beta)
+        if maximizing and value > best_value or not maximizing and value < best_value:
+            best_value, best_move = value, successor
+        # update alpha/beta values
         if maximizing:
-            # if successor is better than current best, update best move
-            if succ_value > best_value:
-                best_value, best_move = succ_value, successor
             alpha = max(alpha, best_value)
-        # set conditions and minimize beta
         else:
-            # if successor is better than current best, update best move
-            if succ_value < best_value:
-                best_value, best_move = succ_value, successor
             beta = min(beta, best_value)
-        # if surpassed value for player, stop checking
+        # prune if the value is outside the bounds
         if alpha >= beta:
             break
 
