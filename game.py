@@ -153,13 +153,14 @@ class Game:
         Args:
             pos: The x,y position of the click
         """
-        if not self.board.is_human_turn():
-            return
-        column = int(pos[0] / self.SQUARE_WIDTH)
-        try:
-            self.board.place_piece(column)
-            self.board.change_turn()
-            self.draw_board()
-        except IllegalMoveException as err:
-            print(err.message)
-            return
+        # only handle clicks during human turns and if they are on the board
+        if self.board.is_human_turn() and pos[1] > self.GRID_OFFSET:
+            # get the column of the click
+            column = int(pos[0] / self.SQUARE_WIDTH)
+            try:
+                # place the piece
+                self.board.place_piece(column)
+                self.board.change_turn()
+            except IllegalMoveException as err:
+                print(err.message)
+        self.draw_board()
