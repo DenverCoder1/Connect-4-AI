@@ -4,7 +4,7 @@ from typing import Optional, Tuple, Union
 from board import Board
 from transposition_table import CacheEntry, TranspositionTable
 
-MAX_DEPTH = 2
+MAX_DEPTH = 5
 
 # transposition table for looking up previously computed positions
 transposition_table = TranspositionTable(8192)

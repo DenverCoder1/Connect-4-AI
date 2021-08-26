@@ -1,4 +1,5 @@
 import copy
+from functools import cached_property
 from typing import Generator, List, Optional, Tuple
 
 from exceptions import ColumnFullException, ColumnOutOfBoundsException
@@ -43,6 +44,7 @@ class Board:
         self.__columns = columns
         self.__players = players
         self.__active_player = active_player
+        self.__column_search_order = self.__column_search_order()
 
     @property
     def grid(self) -> List[List[Optional[Player]]]:
@@ -160,13 +162,24 @@ class Board:
         Yields:
             Board states that can be created by placing a piece
         """
-        for column in range(self.__columns):
+        for column in self.__column_search_order:
             if self.__column_is_full(column):
                 continue
             new_board = self.__copy()
             new_board.place_piece(column)
             new_board.change_turn()
             yield new_board
+
+    def __column_search_order(self) -> Tuple[int, ...]:
+        """
+        Finds the optimal order to choose columns in for optimization
+
+        Returns:
+            A tuple of integers representing the order to choose columns in
+        """
+        # sort columns by distance from center
+        order = lambda x: abs(x - self.__columns // 2)
+        return tuple(sorted(range(self.__columns), key=order))
 
     def key(self) -> Tuple[Tuple[Optional[str]]]:
         """Returns a hashable key for the board"""
