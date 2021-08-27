@@ -39,7 +39,7 @@ class Game:
         self.__height = self.ROW_COUNT * self.SQUARE_WIDTH + self.GRID_OFFSET
         self.__width = self.COLUMN_COUNT * self.SQUARE_WIDTH
         self.__screen = pygame.display.set_mode((self.__width, self.__height))
-        pygame.display.set_caption("Game")
+        pygame.display.set_caption("Connect 4 Game")
         self.board = Board(
             rows=self.ROW_COUNT, columns=self.COLUMN_COUNT, players=players
         )
