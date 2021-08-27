@@ -39,6 +39,9 @@ def play_game():
             # user clicks a cell
             if event.type == pygame.MOUSEBUTTONDOWN:
                 game.handle_click(event.pos)
+            # user changes focus on window
+            if event.type == pygame.ACTIVEEVENT:
+                game.draw_board()
 
         if not game.board.is_human_turn():
             start = time.time()
